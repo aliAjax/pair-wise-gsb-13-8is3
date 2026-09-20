@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from "vue";
+import InvoiceLedger from "./invoice/InvoiceLedger.vue";
 
 type Field = {
   key: string;
@@ -266,6 +267,8 @@ function remove(id: string) {
           </div>
         </section>
       </section>
+
+      <InvoiceLedger />
     </div>
   </main>
 </template>
