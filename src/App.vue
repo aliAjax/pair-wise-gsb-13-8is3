@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from "vue";
+import Ledger from "./invoice/Ledger.vue";
 
 type Field = {
   key: string;
@@ -123,6 +124,7 @@ const records = ref<RecordItem[]>(loadRecords());
 const form = reactive<Record<string, string | number>>(createBlank());
 const note = ref("");
 const filter = ref(project.filters[0]);
+const activeTab = ref<"handover" | "ledger">("handover");
 
 const filteredRecords = computed(() => {
   if (filter.value.startsWith("全部")) return records.value;
@@ -203,6 +205,22 @@ function remove(id: string) {
         </div>
       </header>
 
+      <nav class="tabs">
+        <button
+          type="button"
+          :class="{ active: activeTab === 'handover' }"
+          @click="activeTab = 'handover'"
+        >班次交接</button>
+        <button
+          type="button"
+          :class="{ active: activeTab === 'ledger' }"
+          @click="activeTab = 'ledger'"
+        >发票票号台账</button>
+      </nav>
+
+      <Ledger v-if="activeTab === 'ledger'" />
+
+      <template v-else>
       <section class="metrics">
         <article v-for="(label, index) in project.metricLabels" :key="label" class="metric">
           <span>{{ label }}</span>
@@ -266,6 +284,7 @@ function remove(id: string) {
           </div>
         </section>
       </section>
+      </template>
     </div>
   </main>
 </template>

@@ -81,6 +81,25 @@ h1 {
   font-size: 13px;
 }
 
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.tabs button {
+  background: #fff;
+  color: #445069;
+  border: 1px solid #dfe7f1;
+  padding: 10px 18px;
+}
+
+.tabs button.active {
+  background: #176b87;
+  color: #fff;
+  border-color: #176b87;
+}
+
 .metrics {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
